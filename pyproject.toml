@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "pre-commit-poetry-export"
+version = "0.1.1"
+description = "pre-commit hook to keep requirements.txt updated"
+authors = ["Antonio Luckwu <victor.luckwu@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/avlm/pre-commit-poetry-export"
+repository = "https://github.com/avlm/pre-commit-poetry-export"
+keywords = ["pre-commit", "hook", "poetry", "export", "pip", "requirements", "requirements.txt"]
+classifiers = [
+	"Environment :: Console",
+	"Operating System :: OS Independent",
+	"Topic :: Software Development :: Libraries :: Python Modules",
+]
+include = [
+	"LICENSE",
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+flake8 = "^3.8.3"
+
+[tool.poetry.scripts]
+poetry-export = 'pre_commit_poetry_export.poetry_export:main'
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

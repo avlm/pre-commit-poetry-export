@@ -1,2 +1,5 @@
 # pre-commit-poetry-export
-Pre-commit hook to keep requirements.txt updated
+pre-commit hook to keep requirements.txt updated
+
+- [] write readme
+- [] test

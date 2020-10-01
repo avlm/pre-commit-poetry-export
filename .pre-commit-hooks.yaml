@@ -1,0 +1,5 @@
+- id: poetry-export
+  name: poetry export
+  description: pre-commit hook to keep requirements.txt updated
+  entry: poetry-export
+  language: python
