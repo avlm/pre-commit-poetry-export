@@ -2,24 +2,33 @@ import hashlib
 import os
 
 
+def get_content_md5(file_path):
+    with open(file_path, 'r') as file_handler:
+        content = file_handler.read()
+        content_md5 = hashlib.md5()
+        content_md5.update(content.encode('utf-8'))
+        return content_md5.hexdigest()
+
+
 def main(argv=None):
-    os.system('cp requirements.txt old.requirements.txt')
-    os.system('poetry export -f requirements.txt > requirements.txt')
+    old_requirements_path = 'old.requirements.txt'
+    requirements_path = 'requirements.txt'
 
-    with open('requirements.txt', 'r') as new,\
-            open('old.requirements.txt', 'r') as old:
-        new_content = new.read()
-        new.close()
-        new_md5 = hashlib.md5()
-        new_md5.update(new_content.encode('utf-8'))
+    if not os.path.exists(requirements_path):
+        os.system(f'poetry export -f requirements.txt > {requirements_path}')
+        print('requirements.txt created')
+        return 1
 
-        old_content = old.read()
-        old.close()
-        old_md5 = hashlib.md5()
-        old_md5.update(old_content.encode('utf-8'))
+    if os.path.exists(old_requirements_path):
+        os.remove(old_requirements_path)
 
-    if new_md5.hexdigest() == old_md5.hexdigest():
-        os.system('rm old.requirements.txt')
+    os.system('mv requirements.txt old.requirements.txt')
+    os.system(f'poetry export --dev -f requirements.txt > {requirements_path}')
+    requirements_hash = get_content_md5(requirements_path)
+    old_requirements_hash = get_content_md5(old_requirements_path)
+    os.remove(old_requirements_path)
+
+    if requirements_hash == old_requirements_hash:
         return 0
 
     print('requirements.txt updated!')

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pre-commit-poetry-export"
-version = "0.1.1"
+version = "0.1.2"
 description = "pre-commit hook to keep requirements.txt updated"
 authors = ["Antonio Luckwu <victor.luckwu@gmail.com>"]
 license = "MIT"
@@ -23,6 +23,8 @@ python = "^3.8"
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
 flake8 = "^3.8.3"
+ipython = "^7.24.0"
+ipdb = "^0.13.8"
 
 [tool.poetry.scripts]
 poetry-export = 'pre_commit_poetry_export.poetry_export:main'
